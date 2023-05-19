@@ -25,7 +25,7 @@ The logic of the system incorporates the Floyd-Warshall algorithm to find the sh
 2. floyd-route: finds the shortest route between two coordinates in the map.
 
 ## Usage
-### Prerequisites
+**Prerequisites:**
 - [Python](https://www.python.org/downloads/)
 - [Flask](https://flask.palletsprojects.com/en/2.3.x/installation/)
 - [Mesa](https://pypi.org/project/Mesa/)
