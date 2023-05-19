@@ -1,5 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Threading;
+using System.IO;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -47,51 +50,81 @@ public class AgentController : MonoBehaviour
     List<Vector3> directions;
     List<int> status;
 
-    public int NAgents;
+    int nAgents;
     public GameObject[] carPrefabs;
     public float timeToUpdate = 5.0f, timer, dt;
     public float carRotationSpeed = 5.0f;
-    bool hold = false;
-
+    bool hold = true;
 
     void Start()
     {
+        nAgents = MainMenu.nAgents;
         destinationPositions = new List<Vector3>();
         oldPositions = new List<Vector3>();
         newPositions = new List<Vector3>();
         directions = new List<Vector3>();
         status = new List<int>();
 
-        agents = new GameObject[NAgents];
+        agents = new GameObject[nAgents];
 
-        timer = timeToUpdate;
+        // Hold the simulation till the server starts
+        timer = 0;
 
-        for(int i = 0; i < NAgents; i++)
-            agents[i] = Instantiate(carPrefabs[Random.Range(0, carPrefabs.Length-1)], Vector3.zero, Quaternion.identity);
+        // Start flask server
+        // StartCoroutine(StartFlaskServer());
+
+        // Instantiate all vehicles
+        if (nAgents > 100) 
+            nAgents = 100;
+
+        if (nAgents <= 0)
+            nAgents = 1;
             
+        for(int i = 0; i < nAgents; i++)
+            agents[i] = Instantiate(carPrefabs[Random.Range(0, carPrefabs.Length-1)], Vector3.zero, Quaternion.identity);
+
+        StartCoroutine(StartConfigurations());
+    }
+
+    // Start initial configurations for the connection with the server
+    IEnumerator StartConfigurations()
+    {
+        // Wait till our connection to the server is succesful
+        UnityWebRequest www;
+
+        do
+        {
+            www = UnityWebRequest.Get(serverUrl);
+            yield return www.SendWebRequest();
+        } while (www.result == UnityWebRequest.Result.ConnectionError);
+        
+        // Start coroutines to configurate server and cameras
         StartCoroutine(SendConfiguration()); 
         StartCoroutine(GetCarCamerasRequest());
     }
 
+    // Send our parameters to configure the server
     IEnumerator SendConfiguration()
     {
         WWWForm form = new WWWForm();
 
-        form.AddField("numAgents", NAgents.ToString());
+        form.AddField("numAgents", nAgents.ToString());
 
         UnityWebRequest www = UnityWebRequest.Post(serverUrl + sendConfigEndpoint, form);
         www.SetRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-
+        
         yield return www.SendWebRequest();
 
         if (www.result != UnityWebRequest.Result.Success)
         {
-            Debug.Log(www.error);
+            UnityEngine.Debug.Log(www.error);
         }
         else
         {
+            // If our init request is succesful we get our data and start the timer (Update loop)
             StartCoroutine(GetCarData());
             StartCoroutine(GetDestinationData());
+            timer = timeToUpdate;
         }
     }
 
@@ -150,14 +183,11 @@ public class AgentController : MonoBehaviour
     IEnumerator UpdateSimulation()
     {
         UnityWebRequest www = UnityWebRequest.Get(serverUrl + updateEndpoint);
-        
-        // StartCoroutine(GetBoxData("UPDATE"));
-        // StartCoroutine(GetTrashcanData());
-        
+             
         yield return www.SendWebRequest();
  
         if (www.result != UnityWebRequest.Result.Success)
-            Debug.Log(www.error);
+            UnityEngine.Debug.Log(www.error);
         else 
         {
             StartCoroutine(GetCarData());
@@ -172,7 +202,7 @@ public class AgentController : MonoBehaviour
         yield return www.SendWebRequest();
  
         if (www.result != UnityWebRequest.Result.Success)
-            Debug.Log(www.error);
+            UnityEngine.Debug.Log(www.error);
         else 
         {
             carData = JsonUtility.FromJson<CarData>(www.downloadHandler.text);
@@ -197,7 +227,7 @@ public class AgentController : MonoBehaviour
         yield return www.SendWebRequest();
 
         if (www.result != UnityWebRequest.Result.Success)
-            Debug.Log(www.error);
+            UnityEngine.Debug.Log(www.error);
 
         else 
         {
@@ -216,7 +246,7 @@ public class AgentController : MonoBehaviour
         yield return www.SendWebRequest();
 
         if (www.result != UnityWebRequest.Result.Success)
-            Debug.Log(www.error);
+            UnityEngine.Debug.Log(www.error);
 
         else 
         {
@@ -227,6 +257,35 @@ public class AgentController : MonoBehaviour
             foreach (Vector3 pos in destinationData.positions) {
                 destinationPositions.Add(pos);
             }
+        }
+    }
+
+    IEnumerator  StartFlaskServer()
+    {
+        UnityWebRequest www = UnityWebRequest.Get(serverUrl);
+        yield return www.SendWebRequest();
+
+        // If we don't have connection to the server (it's not initialized yet), we create a new instance of it
+        if (www.result == UnityWebRequest.Result.ConnectionError)
+        {
+            string pythonScriptPath = Path.Combine(Application.streamingAssetsPath, "Server/");
+
+            ProcessStartInfo startInfo = new ProcessStartInfo();
+            startInfo.FileName = "python3";
+            startInfo.Arguments = Path.Combine(pythonScriptPath, "tests.py"); // "flask_server.py");
+            startInfo.WorkingDirectory = pythonScriptPath;
+
+            // startInfo.RedirectStandardOutput = true;
+            // startInfo.UseShellExecute = false;
+            // startInfo.CreateNoWindow = true;
+
+            Process process = new Process();
+            process.StartInfo = startInfo;
+            process.EnableRaisingEvents = true;
+
+            process.Start();
+            process.BeginOutputReadLine();
+            // process.WaitForExit();
         }
     }
 }

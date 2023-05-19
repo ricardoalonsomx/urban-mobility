@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class BasicControls : MonoBehaviour
@@ -15,6 +16,8 @@ public class BasicControls : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape)) {
             Cursor.visible = !Cursor.visible;
+            SceneManager.LoadScene("MainMenu");
+            SceneManager.UnloadScene("MainScene");
         }
     }
 }
