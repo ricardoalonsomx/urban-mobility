@@ -26,6 +26,6 @@ The logic of the system incorporates the Floyd-Warshall algorithm to find the sh
 
 ## Installation
 ### Prerequisites
-1. [Python](https://www.python.org/downloads/)
-2. [Flask](https://flask.palletsprojects.com/en/2.3.x/installation/)
-3. [Mesa](https://pypi.org/project/Mesa/)
+- [Python](https://www.python.org/downloads/)
+- [Flask](https://flask.palletsprojects.com/en/2.3.x/installation/)
+- [Mesa](https://pypi.org/project/Mesa/)
