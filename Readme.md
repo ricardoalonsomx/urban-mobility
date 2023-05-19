@@ -1,6 +1,11 @@
 # Urban Mobility: Modeling with Multi-Agent Systems
 This project aims to simulate the urban mobility of a city using **Mesa's Framework for Python** (mounted in a Flask server) for the system's logic and Unity for the 3D modeling, incorporating from 1 to 100 agents (vehicles), each with a specific destination. [Video demonstration.](https://youtu.be/I9mrDMuF6wc)
 
+## Table of Contents
+1. City building automation
+2. Shortest-path algorithm
+3. Installation
+
 ## City building automation
 The city is created based on a [text file](/Flask/base.txt). The symbol definition is:
 - '^': one squared meter of street pointing to the north.
@@ -18,3 +23,9 @@ The city is created based on a [text file](/Flask/base.txt). The symbol definiti
 The logic of the system incorporates the Floyd-Warshall algorithm to find the shortest route for each vehicle. The [script](/Flask/floyd_warshall.py) has two main functions:
 1. floyd: creates the map for the algorithm, and stores it in a [file](/Flask/floyd_map.py), so next time the script is executed it won't need to redo the map (unless it detects a change in [the creation file](/Flask/base.txt)).
 2. floyd-route: finds the shortest route between two coordinates in the map.
+
+## Installation
+### Prerequisites
+1. [Python](https://www.python.org/downloads/)
+2. [Flask](https://flask.palletsprojects.com/en/2.3.x/installation/)
+3. [Mesa](https://pypi.org/project/Mesa/)
