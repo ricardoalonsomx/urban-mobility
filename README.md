@@ -25,11 +25,11 @@ The logic of the system incorporates the Floyd-Warshall algorithm to find the sh
 2. floyd-route: finds the shortest route between two coordinates in the map.
 
 ## Usage
-**Prerequisites:**
-- [Python](https://www.python.org/downloads/)
-- [Flask](https://flask.palletsprojects.com/en/2.3.x/installation/)
-- [Mesa](https://pypi.org/project/Mesa/)
-
 1. Download [UrbanMobility](https://github.com/ricardoalonsomx/urban-mobility/releases).
 2. Run **FlaskServer.**
 3. Run **UrbanMobility**.
+
+## Prerequisites:
+- [Python](https://www.python.org/downloads/)
+- [Flask](https://flask.palletsprojects.com/en/2.3.x/installation/)
+- [Mesa](https://pypi.org/project/Mesa/)
