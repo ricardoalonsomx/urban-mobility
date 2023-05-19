@@ -4,7 +4,7 @@ This project aims to simulate the urban mobility of a city using **Mesa's Framew
 ## Table of Contents
 1. [City building automation](https://github.com/ricardoalonsomx/urban-mobility/blob/main/Readme.md#city-building-automation)
 2. [Shortest-path algorithm](https://github.com/ricardoalonsomx/urban-mobility/blob/main/Readme.md#shortest-path-algorithm)
-3. [Installation](https://github.com/ricardoalonsomx/urban-mobility/blob/main/Readme.md#installation)
+3. [Usage](https://github.com/ricardoalonsomx/urban-mobility/blob/main/Readme.md#usage)
 
 ## City building automation
 The city is created based on a [text file](/Flask/base.txt). The symbol definition is:
@@ -24,8 +24,12 @@ The logic of the system incorporates the Floyd-Warshall algorithm to find the sh
 1. floyd: creates the map for the algorithm, and stores it in a [file](/Flask/floyd_map.py), so next time the script is executed it won't need to redo the map (unless it detects a change in [the creation file](/Flask/base.txt)).
 2. floyd-route: finds the shortest route between two coordinates in the map.
 
-## Installation
+## Usage
 ### Prerequisites
 - [Python](https://www.python.org/downloads/)
 - [Flask](https://flask.palletsprojects.com/en/2.3.x/installation/)
 - [Mesa](https://pypi.org/project/Mesa/)
+
+1. Download [UrbanMobility](https://github.com/ricardoalonsomx/urban-mobility/releases).
+2. Run **FlaskServer.**
+3. Run **UrbanMobility**.
