@@ -4,7 +4,7 @@ This project aims to simulate the urban mobility of a city using **Mesa's Framew
 ## Table of Contents
 1. [City building automation](https://github.com/ricardoalonsomx/urban-mobility/blob/main/Readme.md#city-building-automation)
 2. [Shortest-path algorithm](https://github.com/ricardoalonsomx/urban-mobility/blob/main/Readme.md#shortest-path-algorithm)
-3. Installation
+3. [Installation](https://github.com/ricardoalonsomx/urban-mobility/blob/main/Readme.md#installation)
 
 ## City building automation
 The city is created based on a [text file](/Flask/base.txt). The symbol definition is:
