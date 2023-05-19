@@ -2,7 +2,7 @@
 This project aims to simulate the urban mobility of a city using **Mesa's Framework for Python** (mounted in a Flask server) for the system's logic and Unity for the 3D modeling, incorporating from 1 to 100 agents (vehicles), each with a specific destination. [Video demonstration.](https://youtu.be/I9mrDMuF6wc)
 
 ## Table of Contents
-1. City building automation
+1. [City building automation](https://pypi.org/project/Mesa/)
 2. Shortest-path algorithm
 3. Installation
 
