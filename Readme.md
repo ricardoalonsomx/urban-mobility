@@ -3,7 +3,7 @@ This project aims to simulate the urban mobility of a city using **Mesa's Framew
 
 ## Table of Contents
 1. [City building automation](https://github.com/ricardoalonsomx/urban-mobility/blob/main/Readme.md#city-building-automation)
-2. Shortest-path algorithm
+2. [Shortest-path algorithm](https://github.com/ricardoalonsomx/urban-mobility/blob/main/Readme.md#shortest-path-algorithm)
 3. Installation
 
 ## City building automation
