@@ -7,7 +7,7 @@ This project aims to simulate the urban mobility of a city using **Mesa's Framew
 3. [Usage](https://github.com/ricardoalonsomx/urban-mobility#usage)
 
 ## City building automation
-The city is created based on a [text file](/Flask/base.txt). The symbol definition is:
+The city is created based on a [text file](/flask/base.txt). The symbol definition is:
 - '^': one squared meter of street pointing to the north.
 - 'v': one squared meter of street pointing to the north.
 - '>': one squared meter of street pointing to the east.
@@ -20,8 +20,8 @@ The city is created based on a [text file](/Flask/base.txt). The symbol definiti
 - 'D': destination building, which will be tinted in red.
 
 ## Shortest-path algorithm
-The logic of the system incorporates the Floyd-Warshall algorithm to find the shortest route for each vehicle. The [script](/Flask/floyd_warshall.py) has two main functions:
-1. floyd: creates the map for the algorithm, and stores it in a [file](/Flask/floyd_map.py), so next time the script is executed it won't need to redo the map (unless it detects a change in [the creation file](/Flask/base.txt)).
+The logic of the system incorporates the Floyd-Warshall algorithm to find the shortest route for each vehicle. The [script](/flask/floyd_warshall.py) has two main functions:
+1. floyd: creates the map for the algorithm, and stores it in a [file](/flask/floyd_map.py), so next time the script is executed it won't need to redo the map (unless it detects a change in [the creation file](/flask/base.txt)).
 2. floyd-route: finds the shortest route between two coordinates in the map.
 
 ## Usage
