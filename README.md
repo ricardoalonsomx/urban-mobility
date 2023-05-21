@@ -1,5 +1,5 @@
 # Urban Mobility: Modeling with Multi-Agent Systems
-This project aims to simulate the urban mobility of a city using **Mesa's Framework for Python** (mounted in a Flask server) for the system's logic and Unity for the 3D modeling, incorporating from 1 to 100 agents (vehicles), each with a specific destination. [Video demonstration.](https://youtu.be/I9mrDMuF6wc)
+This project aims to simulate the urban mobility of a city using **Mesa's Framework for Python** (mounted in a Flask server) for the system's logic and Unity for the 3D modeling, incorporating from 1 to 100 agents (vehicles), each with a specific destination. [Video demonstration.](https://youtu.be/KMveiYLW0GA)
 
 ## Table of Contents
 1. [City building automation](https://github.com/ricardoalonsomx/urban-mobility/#city-building-automation)
@@ -9,7 +9,7 @@ This project aims to simulate the urban mobility of a city using **Mesa's Framew
 ## City building automation
 The city is created based on a [text file](/flask/base.txt). The symbol definition is:
 - '^': one squared meter of street pointing to the north.
-- 'v': one squared meter of street pointing to the north.
+- 'v': one squared meter of street pointing to the south.
 - '>': one squared meter of street pointing to the east.
 - '<': one squared meter of street pointing to the west.
 
